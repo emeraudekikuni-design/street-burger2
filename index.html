@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Street Burger - Kinshasa</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="header">
+        <div class="logo">
+            <h1>STREET <span>BURGER</span> 🍔</h1>
+        </div>
+        <nav class="nav">
+            <a href="#menu">Menu</a>
+            <a href="#cart-section">Mon Panier (<span id="cart-count">0</span>)</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h2>Les meilleurs Burgers de Kinshasa 🇨🇩</h2>
+            <p>100% Frais, Savoureux & Livrés chez vous !</p>
+            <a href="#menu" class="btn-hero">Voir le Menu</a>
+        </div>
+    </section>
+
+    <section id="menu" class="menu-container">
+        <h2>Notre Menu</h2>
+
+        <div class="menu-grid">
+
+            <div class="menu-card">
+                <h3>Street Simple</h3>
+                <p class="description">Steak haché de bœuf, fromage cheddar, sauce maison, salade & tomate.</p>
+                <p class="price">12 000 FC</p>
+                <button type="button" onclick="addToCart('Street Simple', 12000)">Ajouter au panier</button>
+            </div>
+
+            <div class="menu-card">
+                <h3>Street Cheese Deluxe</h3>
+                <p class="description">Double steak, double cheddar, sauce fromage maison & oignons caramélisés.</p>
+                <p class="price">18 000 FC</p>
+                <button type="button" onclick="addToCart('Street Cheese Deluxe', 18000)">Ajouter au panier</button>
+            </div>
+
+            <div class="menu-card">
+                <h3>Chicken Street</h3>
+                <p class="description">Poulet pané croustillant, cheddar, salade, pickles & sauce mayonnaise spicy.</p>
+                <p class="price">15 000 FC</p>
+                <button type="button" onclick="addToCart('Chicken Street', 15000)">Ajouter au panier</button>
+            </div>
+
+            <div class="menu-card">
+                <h3>Portion de Frites 🍟</h3>
+                <p class="description">Frites fraîches, croustillantes et dorées.</p>
+
+                <div class="option-select">
+                    <label for="fries-size">Taille de la portion :</label>
+                    <select id="fries-size">
+                        <option value="Frites (Petite portion)|2000">Petite Portion - 2 000 FC</option>
+                        <option value="Frites (Moyenne portion)|4000">Moyenne Portion - 4 000 FC</option>
+                        <option value="Frites (Grande portion)|6000">Grande Portion - 6 000 FC</option>
+                    </select>
+                </div>
+
+                <button type="button" onclick="addSelectedFries()">Ajouter au panier</button>
+            </div>
+
+            <div class="menu-card">
+                <h3>Boissons & Jus 🥤</h3>
+                <p class="description">Canette ou bouteille au choix bien fraîche.</p>
+                <p class="price">2 000 FC</p>
+
+                <div class="option-select">
+                    <label for="drink-choice">Choisissez votre boisson :</label>
+                    <select id="drink-choice">
+                        <option value="Coca-Cola">Coca-Cola</option>
+                        <option value="Fanta Orange">Fanta Orange</option>
+                        <option value="Fanta Ananas">Fanta Ananas</option>
+                        <option value="Pepsi">Pepsi</option>
+                        <option value="Sprite">Sprite</option>
+                        <option value="Vitalo">Vitalo</option>
+                        <option value="Eau Minérale">Eau Minérale</option>
+                    </select>
+                </div>
+
+                <button type="button" onclick="addSelectedDrink()">Ajouter au panier</button>
+            </div>
+
+            <div class="menu-card combo">
+                <h3>Combo Duo Mix</h3>
+                <p class="description">1 Burger Poulet + 1 Burger Bœuf + Grandes Frites + Boisson au choix.</p>
+                <p class="price">32 000 FC</p>
+
+                <div class="option-select">
+                    <label for="combo1-drink">Choix de la boisson :</label>
+                    <select id="combo1-drink">
+                        <option value="Coca-Cola">Coca-Cola</option>
+                        <option value="Fanta Orange">Fanta Orange</option>
+                        <option value="Pepsi">Pepsi</option>
+                        <option value="Sprite">Sprite</option>
+                    </select>
+                </div>
+
+                <button type="button" onclick="addComboWithDrink('Combo Duo Mix', 32000, 'combo1-drink')">Ajouter au panier</button>
+            </div>
+
+            <div class="menu-card combo">
+                <h3>Combo Street Max</h3>
+                <p class="description">Street Cheese Deluxe + Frites + Sauce Fromage + Boisson au choix.</p>
+                <p class="price">25 000 FC</p>
+
+                <div class="option-select">
+                    <label for="combo2-drink">Choix de la boisson :</label>
+                    <select id="combo2-drink">
+                        <option value="Coca-Cola">Coca-Cola</option>
+                        <option value="Fanta Orange">Fanta Orange</option>
+                        <option value="Pepsi">Pepsi</option>
+                        <option value="Sprite">Sprite</option>
+                    </select>
+                </div>
+
+                <button type="button" onclick="addComboWithDrink('Combo Street Max', 25000, 'combo2-drink')">Ajouter au panier</button>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="cart-section" class="cart-section">
+        <h2>Votre Commande</h2>
+
+        <div class="cart-box">
+            <div id="cart-items">
+                <p class="empty-cart-msg">Votre panier est actuellement vide.</p>
+            </div>
+
+            <div class="cart-summary">
+                <p>Sous-total : <span id="cart-subtotal">0 FC</span></p>
+                <p>Livraison (Kinshasa) : <span id="cart-delivery">0 FC</span></p>
+                <h3>Total : <span id="cart-total">0 FC</span></h3>
+            </div>
+
+            <div class="checkout-form">
+                <input type="text" id="customer-name" placeholder="Votre Nom complet" required>
+                <input type="text" id="customer-address" placeholder="Adresse exacte de livraison (Commune / Quartier / Réf)" required>
+                <input type="tel" id="customer-phone" placeholder="Numéro de téléphone" required>
+
+                <div id="cart-actions" style="display:none; margin-top:10px;">
+                    <button type="button" onclick="clearCart()">Vider le panier</button>
+                </div>
+
+                <button class="btn-whatsapp" type="button" onclick="sendWhatsAppOrder()">📲 Valider ma commande sur WhatsApp</button>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact" class="site-footer">
+        <div class="footer-container">
+            <h3>STREET BURGER 🍔</h3>
+            <p>Le goût authentique du burger à Kinshasa !</p>
+
+            <div class="contact-details">
+                <p><strong>📲 WhatsApp Commande :</strong> <a href="https://wa.me/243986133422" target="_blank">+243 986 133 422</a></p>
+                <p><strong>📞 Contacts Directs & Service Client :</strong></p>
+                <ul>
+                    <li><a href="tel:+243850772443">+243 850 772 443</a></li>
+                    <li><a href="tel:+2438492247689">+243 849 224 7689</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-info">
+                <p>🛵 <strong>Frais de livraison fixe :</strong> 8 000 FC (Partout à Kinshasa)</p>
+                <p>&copy; 2026 Street Burger Enterprise. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
